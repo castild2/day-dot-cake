@@ -1,0 +1,7 @@
+{
+  "name": "day-dot-cake",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
