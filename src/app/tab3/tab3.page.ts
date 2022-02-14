@@ -7,6 +7,10 @@ import { Component } from '@angular/core';
 })
 export class Tab3Page {
 
-  constructor() {}
+  pageName: string
+
+  constructor() {
+    this.pageName = "Add Items"
+  }
 
 }
