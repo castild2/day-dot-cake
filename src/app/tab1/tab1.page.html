@@ -12,5 +12,18 @@
       <ion-title size="large">{{ pageName }}</ion-title>
     </ion-toolbar>
   </ion-header>
+
+
+  <ion-card *ngFor="let item of items">
+    <ion-card-header>
+      <ion-card-title>{{ item.name }}</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      {{ item.expireDate }}
+    </ion-card-content>
+  </ion-card>
+
+  
   
 </ion-content>

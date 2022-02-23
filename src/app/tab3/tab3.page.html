@@ -13,4 +13,60 @@
     </ion-toolbar>
   </ion-header>
 
+  <form class="item-form" [formGroup]="itemForm">
+
+    <ion-item>
+      <ion-label>Name</ion-label>
+      <ion-input formControlName="name" placeholder="Type name"></ion-input>
+    </ion-item>
+  
+    <ion-item>
+      <ion-label>Quantiy</ion-label>
+      <ion-input formControlName="quantity" type="number"placeholder="Type quantity"></ion-input>
+    </ion-item>
+  
+    <ion-item>
+      <ion-label>Barcode</ion-label>
+      <ion-input formControlName="barcode" type="number" placeholder="Type barcode"></ion-input>
+    </ion-item>
+  
+    <ion-item>
+      <ion-label>Delivery date</ion-label>
+      <ion-input formControlName="deliveryDate" [value]="deliveryDate"></ion-input>
+      <ion-button fill="clear" id="delivery-date">
+        <ion-icon icon="calendar"></ion-icon>
+      </ion-button>
+      <ion-popover trigger="delivery-date" show-backdrop="false">
+        <ng-template>
+          <ion-datetime
+            #deliveryDateInput
+            presentation="date"
+            (ionChange)="deliveryDate = formatDate(deliveryDateInput.value)"
+          ></ion-datetime>
+        </ng-template>
+      </ion-popover>
+    </ion-item>
+
+    <ion-item>
+      <ion-label >Expire date</ion-label>
+      <ion-input formControlName="expireDate" [value]="expireDate"></ion-input>
+      <ion-button fill="clear" id="expire-date">
+        <ion-icon icon="calendar"></ion-icon>
+      </ion-button>
+      <ion-popover trigger="expire-date" show-backdrop="false">
+        <ng-template>
+          <ion-datetime
+            #expireDateInput
+            presentation="date"
+            (ionChange)="expireDate = formatDate(expireDateInput.value)"
+          ></ion-datetime>
+        </ng-template>
+      </ion-popover>
+    </ion-item>
+  
+  
+    <ion-button class="submit-button" [disabled]="itemForm.invalid" (click)="addItem()" expand="block">Add item</ion-button>
+
+  </form>
+
 </ion-content>

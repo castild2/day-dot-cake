@@ -1,5 +1,7 @@
 import { Injectable } from "@angular/core";
 import { AngularFireDatabase, AngularFireList, AngularFireObject } from '@angular/fire/compat/database';
+import { Item } from "../model/item";
+import { map, tap } from "rxjs/operators"
 import { Shop } from "../model/shop";
 
 @Injectable({
@@ -25,6 +27,10 @@ export class ShopService {
     getShop(id: string) {
         this.shopRef = this.db.object('/shops/' + id);
         return this.shopRef;
+    }
+
+    addItemToShopById(items: Item[]) {
+        this.shopRef.update({items})
     }
 
 }

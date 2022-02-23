@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Item } from '../model/item';
+import { Shop } from '../model/shop';
 import { ShopService } from '../services/shop.service';
 
 @Component({
@@ -8,8 +10,9 @@ import { ShopService } from '../services/shop.service';
 })
 export class Tab1Page implements OnInit {
 
-
   pageName: string
+  shop: Shop
+  items: Item[]
 
   constructor(private readonly shopService: ShopService) {
     this.pageName = "Products to expire"
@@ -17,13 +20,15 @@ export class Tab1Page implements OnInit {
 
 
   ngOnInit(): void {
-    this.shopService.getShopList().snapshotChanges()
-      .subscribe((data) => {
-        console.log(data)
+    this.shopService.getShop("43035315").valueChanges().subscribe((result: Shop) => {
+      this.shop = result
+      this.items = this.shop.items
+      
+
+      this.items?.sort((a, b) => {
+        return Number(new Date(a.expireDate)) - Number(new Date(b.expireDate))
       })
 
-    this.shopService.getShop("lkj34fij34").valueChanges().subscribe(res => {
-      console.log(res)
     });
   }
 
