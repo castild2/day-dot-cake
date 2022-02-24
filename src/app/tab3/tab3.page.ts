@@ -25,7 +25,6 @@ export class Tab3Page {
 
     this.itemForm = this.fb.group({
       name: ['', [Validators.required]],
-      barcode: ['', [Validators.required]],
       quantity: ['', [Validators.required]],
       deliveryDate: ['', [Validators.required]],
       expireDate: ['', [Validators.required]],
@@ -45,18 +44,16 @@ export class Tab3Page {
 
       let item: Item = {
         name: this.itemForm.get('name').value,
-        barcode: this.itemForm.get('barcode').value,
         quantity: this.itemForm.get('quantity').value,
         deliveryDate: this.itemForm.get('deliveryDate').value,
         expireDate: this.itemForm.get('expireDate').value,
       }
 
       items.push(item)
-      this.shopService.addItemToShopById(items)
+      this.shopService.updateItems(items)
       
       this.itemForm.patchValue({
         name: '',
-        barcode: '',
         quantity: '',
         deliveryDate: '',
         expireDate: ''

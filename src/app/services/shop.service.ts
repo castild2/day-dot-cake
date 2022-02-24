@@ -29,7 +29,7 @@ export class ShopService {
         return this.shopRef;
     }
 
-    addItemToShopById(items: Item[]) {
+    updateItems(items: Item[]) {
         this.shopRef.update({items})
     }
 

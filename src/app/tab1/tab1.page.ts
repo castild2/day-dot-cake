@@ -20,6 +20,10 @@ export class Tab1Page implements OnInit {
 
 
   ngOnInit(): void {
+    this.getShop()
+  }
+
+  getShop() {
     this.shopService.getShop("43035315").valueChanges().subscribe((result: Shop) => {
       this.shop = result
       this.items = this.shop.items
@@ -29,7 +33,21 @@ export class Tab1Page implements OnInit {
         return Number(new Date(a.expireDate)) - Number(new Date(b.expireDate))
       })
 
+      let currentDate = new Date()
+      this.items?.map((item) => {
+        item.expired = new Date(item.expireDate) <= currentDate
+      })
+
     });
+  }
+
+  removeProduct(i: number) {
+
+    this.items.splice(i, 1)
+
+    this.shopService.updateItems(this.items)
+    
+    this.getShop()
   }
 
 }

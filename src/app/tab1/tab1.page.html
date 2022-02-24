@@ -14,14 +14,23 @@
   </ion-header>
 
 
-  <ion-card *ngFor="let item of items">
-    <ion-card-header>
-      <ion-card-title>{{ item.name }}</ion-card-title>
-    </ion-card-header>
-  
-    <ion-card-content>
-      {{ item.expireDate }}
-    </ion-card-content>
+  <ion-card *ngFor="let item of items; let i = index">
+
+    <div class="product-container">
+      <div class="product-info">
+        <ion-card-header>
+          <ion-card-title>{{ item.name }}</ion-card-title>
+        </ion-card-header>
+      
+        <ion-card-content>
+          {{ item.expireDate }}
+        </ion-card-content>
+      </div>
+      <div *ngIf="item.expired" class="product-actions">
+        <ion-button (click)="removeProduct(i)"><ion-icon name="trash-outline" size="medium"></ion-icon></ion-button>        
+      </div>
+    </div>
+    
   </ion-card>
 
   

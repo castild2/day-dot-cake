@@ -1,0 +1,14 @@
+.product-container {
+    display: flex;
+    flex-direction: row;
+
+    .product-info {
+        flex-grow: 1;
+    }
+
+    .product-actions {
+        display: flex;
+        align-items: center;
+        margin: 15px;
+    }
+}
