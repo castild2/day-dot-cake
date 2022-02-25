@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Item } from '../model/item';
 import { Shop } from '../model/shop';
 import { ShopService } from '../services/shop.service';
@@ -14,7 +15,7 @@ export class Tab1Page implements OnInit {
   shop: Shop
   items: Item[]
 
-  constructor(private readonly shopService: ShopService) {
+  constructor(private readonly shopService: ShopService, private readonly router: Router) {
     this.pageName = "Products to expire"
   }
 
@@ -48,6 +49,10 @@ export class Tab1Page implements OnInit {
     this.shopService.updateItems(this.items)
     
     this.getShop()
+  }
+
+  goToDetail(item: Item) {
+    this.router.navigate(['/tabs/tab1/detail', {item: JSON.stringify(item)}])
   }
 
 }

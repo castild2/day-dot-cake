@@ -16,7 +16,7 @@
   <ion-datetime #calendar min="2022-01-01" max="2022-12-31" presentation="date" (ionChange)="getExpireProducts(calendar.value)"></ion-datetime>
 
 
-  <ion-card *ngFor="let item of itemsSelected">
+  <ion-card (click)="goToDetail(item)" *ngFor="let item of itemsSelected">
     <ion-card-header>
       <ion-card-title>{{ item.name }}</ion-card-title>
     </ion-card-header>

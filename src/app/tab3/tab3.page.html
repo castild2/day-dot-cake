@@ -17,12 +17,12 @@
 
     <ion-item>
       <ion-label>Name</ion-label>
-      <ion-input formControlName="name" placeholder="Type name"></ion-input>
+      <ion-input formControlName="name" placeholder="Type name" [value]="itemForm.get('name').value"></ion-input>
     </ion-item>
   
     <ion-item>
       <ion-label>Quantiy</ion-label>
-      <ion-input formControlName="quantity" type="number"placeholder="Type quantity"></ion-input>
+      <ion-input formControlName="quantity" type="number"placeholder="Type quantity" [value]="itemForm.get('quantity').value"></ion-input>
     </ion-item>
   
     <ion-item>
@@ -60,7 +60,7 @@
     </ion-item>
   
   
-    <ion-button class="submit-button" [disabled]="itemForm.invalid" (click)="addItem()" expand="block">Add item</ion-button>
+    <ion-button class="submit-button" [disabled]="itemForm.invalid" (click)="addItem()" expand="block">{{itemButton}}</ion-button>
 
   </form>
 

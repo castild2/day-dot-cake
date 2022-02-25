@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Item } from '../model/item';
 import { Shop } from '../model/shop';
 import { ShopService } from '../services/shop.service';
@@ -14,7 +15,7 @@ export class Tab2Page implements OnInit {
   items: Item[]
   itemsSelected: Item[]
 
-  constructor(private readonly shopService: ShopService) {
+  constructor(private readonly shopService: ShopService, private readonly router: Router) {
     this.pageName = "Calendar"
   }
 
@@ -43,6 +44,10 @@ export class Tab2Page implements OnInit {
       return selectedDay == itemDay && selectedMonth == itemMonth && selectedYear == itemYear
 
     })
+  }
+
+  goToDetail(item: Item) {
+    this.router.navigate(['/tabs/tab1/detail', {item: JSON.stringify(item)}])
   }
 
 }

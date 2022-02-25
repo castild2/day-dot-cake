@@ -14,7 +14,7 @@
   </ion-header>
 
 
-  <ion-card *ngFor="let item of items; let i = index">
+  <ion-card (click)="goToDetail(item)" *ngFor="let item of items; let i = index">
 
     <div class="product-container">
       <div class="product-info">
