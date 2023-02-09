@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
-import { Outlet } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 import styled from "styled-components";
 import {
   faHome,
@@ -13,16 +13,22 @@ const Nav = () => {
     <div>
       <NavCont>
         <ContIconNav>
-          <FontAwesomeIcon icon={faHome} size="xl" />
-          <p>Home</p>
+          <NavLink to="/">
+            <FontAwesomeIcon icon={faHome} size="xl" color="white" />
+            <p>Home</p>
+          </NavLink>
         </ContIconNav>
         <ContIconNav>
-          <FontAwesomeIcon icon={faSquarePlus} size="xl" />
-          <p>Add Items</p>
+          <NavLink to="/additem">
+            <FontAwesomeIcon icon={faSquarePlus} size="xl" color="white" />
+            <p>Add Items</p>
+          </NavLink>
         </ContIconNav>
         <ContIconNav>
-          <FontAwesomeIcon icon={faCalendarDays} size="xl" />
-          <p>Calendar</p>
+          <NavLink to="/calendar">
+            <FontAwesomeIcon icon={faCalendarDays} size="xl" color="white" />
+            <p>Calendar</p>
+          </NavLink>
         </ContIconNav>
       </NavCont>
       <Outlet />
@@ -40,7 +46,7 @@ const NavCont = styled.nav`
   display: flex;
   align-items: center;
   justify-content: space-around;
-  background-color: azure;
+  background-color: black;
 `;
 
 const ContIconNav = styled.div`
@@ -49,4 +55,15 @@ const ContIconNav = styled.div`
   justify-content: center;
   align-items: center;
   gap: 5px;
+  color: white;
+
+  a {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    color: white;
+    text-decoration: none;
+  }
 `;
