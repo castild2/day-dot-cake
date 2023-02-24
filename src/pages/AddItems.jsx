@@ -29,7 +29,7 @@ const AddItems = () => {
         method: 'POST',
         headers: { 'content-type': 'application/x-www-form-urlencoded' },
         data: { image : img },
-        url: "https://7dd7-2a00-23c8-131a-f901-d90e-9128-5dad-a78b.ngrok.io/predict/"
+        url: "https://1fa2-2a00-23c8-131a-f901-d90e-9128-5dad-a78b.ngrok.io/predict/"
       };
 
        const resServer = await axios(options)
