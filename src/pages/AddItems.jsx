@@ -5,9 +5,9 @@ import AddFile from "../animations/AddFile";
 import Loading from "../animations/Loading";
 
 const AddItems = () => {
-  const [infoImage, setInfoImage] = useState("");
+  const [ setInfoImage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [img, setImg] = useState("");
+  const [ setImg] = useState("");
 
   const onSubmit = (e) => {
     e.preventDefault();
