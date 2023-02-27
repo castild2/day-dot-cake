@@ -11,4 +11,5 @@ body{
   background-image: url('./img/grey-g0d9dfbf60_1280.png');
   background-repeat: no-repeat;
   background-size:cover;
+  height: 100vh;
 }
