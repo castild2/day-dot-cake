@@ -1,7 +1,5 @@
 import axios from "axios";
 import React, { useState } from "react";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 import styled from "styled-components";
 import AddFile from "../animations/AddFile";
 import Loading from "../animations/Loading";
@@ -76,25 +74,7 @@ const AddItems = () => {
   </form>*/}
     </MainPrincipal>
   );
-  /*class AddItems extends Component {
-    sate={
-      date: new Date("2023","02","27")
-    }
-    render (){
-      return(
-        <>
-        <div className='container'>
-
-        <div className='center'>
-          <DatePicker selected={this.state.date}></DatePicker>
-
-        </div>
-
-          </div>
-        </>
-      )
-    }
-  }*/
+  
 };
 
 export default AddItems;
