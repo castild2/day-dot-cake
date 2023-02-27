@@ -46,7 +46,7 @@ const NavCont = styled.nav`
   display: flex;
   align-items: center;
   justify-content: space-around;
-  background-color: black;
+  background-color: #8b0505;
 `;
 
 const ContIconNav = styled.div`
