@@ -5,15 +5,18 @@ import AddFile from "../animations/AddFile";
 import Loading from "../animations/Loading";
 
 const AddItems = () => {
-  const [ setInfoImage] = useState("");
+  const [ infoImage, setInfoImage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [ setImg] = useState("");
+  const [ img, setImg] = useState("");
+  const [ viewImage, setViewImage ] = useState('')
 
   const onSubmit = (e) => {
     e.preventDefault();
     setIsLoading(true)
     const formData = new FormData(e.target);
     const imageFile = formData.get("img");
+
+    console.log( formData.get("img"))
 
     const image = new Image();
     image.src = URL.createObjectURL(imageFile);
@@ -34,17 +37,30 @@ const AddItems = () => {
         method: "POST",
         headers: { "content-type": "application/x-www-form-urlencoded" },
         data: { image: img },
-        url: "https://b2bd-2a00-23c8-131a-f901-9987-fae6-5a27-e76.ngrok.io/predict/",
+        url: " https://c95f-2a00-23c8-131a-f901-3867-279-7fb7-d472.ngrok.io./predict/",
       };
 
       const resServer = await axios(options);
 
       setImg(formData.get("image"));
       setIsLoading(false)
-
+      console.log(resServer)
       setInfoImage(resServer.data.class);
     };
   };
+
+  const viewImg = (e) => {
+
+    const dataImg = e.target.files[0]
+    const viewImg = new FileReader()
+
+    viewImg.onload = () =>{
+      setViewImage( viewImg.result)
+    }
+
+   viewImg.readAsDataURL(dataImg) 
+  
+  }
 
   return (
     <MainPrincipal>
@@ -55,9 +71,9 @@ const AddItems = () => {
           <>
           
             <MainContainerAddImg>
-              <h1>Add image</h1>
-              <AddFile />
-              <InputFile type="file" name="img" accept=".jpeg, .jpg" />
+              { infoImage ? <h2>This is a {infoImage}</h2> : <h1>Add Image</h1> }
+              {viewImage  ? <img src={viewImage}/>  : <AddFile />}
+             <InputFile type="file" name="img" accept=".jpeg, .jpg" onChange={viewImg} />
             </MainContainerAddImg>
             <button>Send</button>
           </>
@@ -91,6 +107,17 @@ const MainContainerAddImg = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  h2{
+    text-align: center;
+  }
+
+  img{
+    width: 90%;
+    height: 350px;
+    border-radius: 10px;
+    margin-top: 20px;
+  }
 `;
 
 const Form = styled.form`
@@ -102,6 +129,7 @@ const Form = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 20px;
 
   button {
     width: 80%;
