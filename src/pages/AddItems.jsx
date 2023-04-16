@@ -1,22 +1,25 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { collection, addDoc } from "firebase/firestore";
 import styled from "styled-components";
 import AddFile from "../animations/AddFile";
 import Loading from "../animations/Loading";
+import { db } from "../utils/firebase";
 
 const AddItems = () => {
-  const [ infoImage, setInfoImage] = useState("");
+  const [infoImage, setInfoImage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [ img, setImg] = useState("");
-  const [ viewImage, setViewImage ] = useState('')
+  const [img, setImg] = useState("");
+  const [viewImage, setViewImage] = useState("");
+  const [isDetectImg, setIsDetectImg] = useState(false);
+  const [date, setDate] = useState('')
+  const [ classCake, setClassCake] = useState('')
 
   const onSubmit = (e) => {
     e.preventDefault();
-    setIsLoading(true)
+    setIsLoading(true);
     const formData = new FormData(e.target);
     const imageFile = formData.get("img");
-
-    console.log( formData.get("img"))
 
     const image = new Image();
     image.src = URL.createObjectURL(imageFile);
@@ -37,29 +40,49 @@ const AddItems = () => {
         method: "POST",
         headers: { "content-type": "application/x-www-form-urlencoded" },
         data: { image: img },
-        url: " https://c95f-2a00-23c8-131a-f901-3867-279-7fb7-d472.ngrok.io./predict/",
+        url: " https://b4c5-2a00-23c8-131a-f901-3581-c77f-259b-4a16.ngrok-free.app/predict/",
       };
 
       const resServer = await axios(options);
+      const probabilidad = resServer.data.prob;
+
+     
+
+      if (probabilidad < 0.97) {
+        setInfoImage("No se pudo detectar la imagen");
+        return setIsLoading(false);
+      }
 
       setImg(formData.get("image"));
-      setIsLoading(false)
-      console.log(resServer)
-      setInfoImage(resServer.data.class);
+      setIsDetectImg(true);
+      setIsLoading(false);
+      setInfoImage(`This is a ${resServer.data.class}`);
+      setClassCake(resServer.data.class)
     };
   };
 
   const viewImg = (e) => {
+    const dataImg = e.target.files[0];
+    const viewImg = new FileReader();
 
-    const dataImg = e.target.files[0]
-    const viewImg = new FileReader()
+    viewImg.onload = () => {
+      setViewImage(viewImg.result);
+    };
 
-    viewImg.onload = () =>{
-      setViewImage( viewImg.result)
+    viewImg.readAsDataURL(dataImg);
+  };
+
+  const addItem = async () => {
+
+    try {
+      const docRef = await addDoc(collection(db, "dateCakes"), {
+        name : classCake,
+        date
+      });
+    } catch (e) {
+      console.error("Error adding document: ", e);
     }
 
-   viewImg.readAsDataURL(dataImg) 
-  
   }
 
   return (
@@ -69,13 +92,24 @@ const AddItems = () => {
           <Loading />
         ) : (
           <>
-          
             <MainContainerAddImg>
-              { infoImage ? <h2>This is a {infoImage}</h2> : <h1>Add Image</h1> }
-              {viewImage  ? <img src={viewImage}/>  : <AddFile />}
-             <InputFile type="file" name="img" accept=".jpeg, .jpg" onChange={viewImg} />
+              {infoImage ? <h2>{infoImage}</h2> : <h1>Add Image</h1>}
+              {viewImage ? <img src={viewImage} /> : <AddFile />}
+              <InputFile
+                type="file"
+                name="img"
+                accept=".jpeg, .jpg"
+                onChange={viewImg}
+              />
             </MainContainerAddImg>
-            <button>Send</button>
+            {isDetectImg ? (
+              <>
+                <input type="date" onChange={(e) => setDate(e.target.value)} />
+                <button onClick={addItem}>Add</button>
+              </>
+            ) : (
+              <button>Send</button>
+            )}
           </>
         )}
       </Form>
@@ -90,7 +124,6 @@ const AddItems = () => {
   </form>*/}
     </MainPrincipal>
   );
-  
 };
 
 export default AddItems;
@@ -108,11 +141,11 @@ const MainContainerAddImg = styled.div`
   flex-direction: column;
   align-items: center;
 
-  h2{
+  h2 {
     text-align: center;
   }
 
-  img{
+  img {
     width: 90%;
     height: 350px;
     border-radius: 10px;
