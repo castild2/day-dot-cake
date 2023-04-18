@@ -9,7 +9,6 @@ import { db } from "../utils/firebase";
 const AddItems = () => {
   const [infoImage, setInfoImage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [img, setImg] = useState("");
   const [viewImage, setViewImage] = useState("");
   const [isDetectImg, setIsDetectImg] = useState(false);
   const [date, setDate] = useState('')
@@ -53,7 +52,6 @@ const AddItems = () => {
         return setIsLoading(false);
       }
 
-      setImg(formData.get("image"));
       setIsDetectImg(true);
       setIsLoading(false);
       setInfoImage(`This is a ${resServer.data.class}`);
@@ -75,7 +73,7 @@ const AddItems = () => {
   const addItem = async () => {
 
     try {
-      const docRef = await addDoc(collection(db, "dateCakes"), {
+     await addDoc(collection(db, "dateCakes"), {
         name : classCake,
         date
       });
@@ -98,7 +96,7 @@ const AddItems = () => {
           <>
             <MainContainerAddImg>
               {infoImage ? <h2>{infoImage}</h2> : <h1>Add Image</h1>}
-              {viewImage ? <img src={viewImage} /> : <AddFile />}
+              {viewImage ? <img src={viewImage} alt="" /> : <AddFile />}
               <InputFile
                 type="file"
                 name="img"

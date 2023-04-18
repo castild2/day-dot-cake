@@ -2,27 +2,13 @@ import React from "react";
 import styled from "styled-components";
 
 const Home = () => {
-  const data = [
-    {
-      product: "Salted Caramel Brownie",
-      expirationDate: "19/02/2023",
-    },
-    {
-      product: "Bluberry Muffin",
-      expirationDate: "11/02/2023",
-    },
-    {
-      product: "Raspberry Almond Cake",
-      expirationDate: "01/02/2023",
-    },
-  ];
 
   return (
     <MainContainer>
       <TitleHome>LIST OF PRODUCTS TO EXPIRE</TitleHome>
       <MainBody>
       <h2>Titulo Aplicacion</h2>
-      
+
       </MainBody>
     </MainContainer>
   );
