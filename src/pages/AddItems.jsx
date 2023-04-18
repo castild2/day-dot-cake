@@ -40,7 +40,7 @@ const AddItems = () => {
         method: "POST",
         headers: { "content-type": "application/x-www-form-urlencoded" },
         data: { image: img },
-        url: " https://b4c5-2a00-23c8-131a-f901-3581-c77f-259b-4a16.ngrok-free.app/predict/",
+        url: "https://a8de-2a00-23c8-131a-f901-c5c6-aab3-83bf-62b0.ngrok-free.app/predict/",
       };
 
       const resServer = await axios(options);
@@ -79,6 +79,10 @@ const AddItems = () => {
         name : classCake,
         date
       });
+      setTimeout(() => {
+        window.location.href = '/additem'
+      },[2000])
+      
     } catch (e) {
       console.error("Error adding document: ", e);
     }

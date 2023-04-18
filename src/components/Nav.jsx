@@ -27,7 +27,7 @@ const Nav = () => {
         <ContIconNav>
           <NavLink to="/calendar">
             <FontAwesomeIcon icon={faCalendarDays} size="xl" color="white" />
-            <p>Calendar</p>
+            <p>List</p>
           </NavLink>
         </ContIconNav>
       </NavCont>
