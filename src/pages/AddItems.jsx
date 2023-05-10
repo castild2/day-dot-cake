@@ -39,7 +39,7 @@ const AddItems = () => {
         method: "POST",
         headers: { "content-type": "application/x-www-form-urlencoded" },
         data: { image: img },
-        url: "https://a8de-2a00-23c8-131a-f901-c5c6-aab3-83bf-62b0.ngrok-free.app/predict/",
+        url: "http://127.0.0.1:8000/predict/",
       };
 
       const resServer = await axios(options);
@@ -48,7 +48,7 @@ const AddItems = () => {
      
 
       if (probabilidad < 0.97) {
-        setInfoImage("No se pudo detectar la imagen");
+        setInfoImage("The picture can not be detected!, please try to upload a valid picture");
         return setIsLoading(false);
       }
 
@@ -60,6 +60,7 @@ const AddItems = () => {
   };
 
   const viewImg = (e) => {
+
     const dataImg = e.target.files[0];
     const viewImg = new FileReader();
 
