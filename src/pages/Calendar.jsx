@@ -53,6 +53,7 @@ const TitleHome = styled.h2`
   background-color: white;
   padding: 15px;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  color: #d38c98;
 `;
 
 const ContainertProducts = styled.div`
